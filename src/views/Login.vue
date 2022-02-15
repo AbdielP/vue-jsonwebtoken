@@ -19,6 +19,7 @@
           />
           <button type="submit">Login</button>
         </form>
+        <router-link to="/auth/signin">Sign in</router-link>
       </div>
     </div>
     <h2 class="h2">Made by @abdielpinzon - Vue CLI 3@</h2>

@@ -8,6 +8,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
+    path: '/auth/signin',
+    name: 'Signin',
+    component: () => import(/* webpackChunkName: "signin" */ '../views/Signin.vue')
+  },
+  {
     path: '/auth/me',
     name: 'User',
     component: () => import(/* webpackChunkName: "user" */ '../views/User.vue')
@@ -20,7 +25,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if(to.name === 'Login') return true
+  if(to.name === 'Login' || to.name === 'Signin') return true
   else 
     return localStorage.getItem('jwtapptoken') ? true : { name: 'Login' };
 });

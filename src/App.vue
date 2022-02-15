@@ -1,15 +1,19 @@
 <template>
   <div>
-    <Navigation v-if="$route.name !== 'Login'" />
+    <Navigation v-if="isLoggedIn === true" />
     <router-view />
   </div>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import { mapGetters } from "vuex";
 export default {
   components: {
     Navigation,
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"]),
   },
 };
 </script>

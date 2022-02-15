@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "User",
   data() {
@@ -26,6 +26,7 @@ export default {
   computed: {
     ...mapGetters(["getToken"]),
   },
+  ...mapMutations(["setToken"]),
   methods: {
     async getUserInfo() {
       try {
@@ -42,6 +43,7 @@ export default {
     },
     errorHandler(err) {
       if (err.name === "TokenExpiredError") {
+        this.setToken(null);
         localStorage.removeItem("jwtapptoken");
         return this.$router.push("/auth/login");
       }

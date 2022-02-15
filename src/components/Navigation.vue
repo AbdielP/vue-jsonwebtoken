@@ -9,17 +9,21 @@
       aria-labelby="Logout">
       Logout
     </button>
+    {{isLoggedIn}}
+      {{getToken}}
   </nav>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters(["isLoggedIn", "getToken"]),
   },
   methods: {
+    ...mapMutations(["setToken"]),
     logOut() {
+      this.setToken(null);
       localStorage.removeItem("jwtapptoken");
       this.$router.push("/auth/login");
     },

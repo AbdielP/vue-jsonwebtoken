@@ -2,12 +2,21 @@
   <main class="main">
     <h1 class="h1">Vue jasonwebtoken example</h1>
     <div class="container display-flex">
-      <img class="container__img" src="../assets/img/vue-dynamic-forms.jpg" alt="Vue form"/>
+      <img
+        class="container__img"
+        src="../assets/img/vue-dynamic-forms.jpg"
+        alt="Vue form"
+      />
       <div class="container__form">
         <h2>Login form</h2>
         <form class="form display-flex" @submit.prevent="login">
           <input v-model="username" placeholder="username" />
-          <input v-model="password" placeholder="password" type="password" autocomplete="true"/>
+          <input
+            v-model="password"
+            placeholder="password"
+            type="password"
+            autocomplete="true"
+          />
           <button type="submit">Login</button>
         </form>
       </div>
@@ -17,6 +26,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -26,11 +36,12 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setToken"]),
     async login() {
       try {
         const response = await fetch(
-        //   `https://backend-node-server.herokuapp.com/api/vueforms/login`,
-        `http://localhost:3000/api/vueforms/login`,
+          `https://backend-node-server.herokuapp.com/api/vueforms/login`,
+          // `http://localhost:3000/api/vueforms/login`,
           {
             method: "POST",
             headers: {
@@ -43,10 +54,15 @@ export default {
           }
         );
         const data = await response.json();
-        console.log(data);
+        data.ok ? this.afterLogin(data) : console.log(data.message);
       } catch (error) {
         console.log(error);
       }
+    },
+    afterLogin(data) {
+      this.setToken(data.token);
+      localStorage.setItem('jwtapptoken', data.token);
+      this.$router.push('/auth/me'); 
     },
   },
 };
@@ -74,9 +90,9 @@ export default {
       width: 40%;
     }
     .container__form {
-        .form {
-            flex-direction: column;
-        }
+      .form {
+        flex-direction: column;
+      }
     }
   }
 }

@@ -2,11 +2,21 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    token: localStorage.getItem('jwtapptoken') || null
   },
   mutations: {
+    setToken (state, token) {
+      state.token = token;
+    }
   },
-  actions: {
+  getters: {
+    isLoggedIn (state) {
+      return !!state.token;
+    },
+    getToken (state) {
+      return state.token;
+    }
   },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 })

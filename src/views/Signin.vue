@@ -10,28 +10,18 @@
         <BaseInput type="email" v-model="email" label="Email Address"/>
         <!-- Contact number -->
         <div class="display-flex">
-          <select v-model="type">
-            <option value="" disabled selected>-</option>
-            <option value="mobile">Mobile</option>
-            <option value="phone">Phone</option>
-          </select>
+          <BaseSelect v-model="type"/>
           <BaseInput v-model="number" label="Contact number"/>
         </div>
         <!-- Extra contact number -->
         <div v-for="(row, index) in rows" :key="index" class="display-flex">
-          <select v-model="row.type">
-            <option value="" disabled selected>-</option>
-            <option value="mobile">Mobile</option>
-            <option value="phone">Phone</option>
-          </select>
+          <BaseSelect v-model="row.type"/>
           <BaseInput v-model="row.number" label="Contact number"/>
           <button
             @click="removeRow(index)"
             type="button"
             aria-labelledby="Remove number"
-          >
-            Remove -
-          </button>
+          >Remove - </button>
         </div>
         <button @click="addRow" type="button" aria-labelledby="Add phone +">
           Add phone +
@@ -45,10 +35,12 @@
 
 <script>
 import BaseInput from '@/components/BaseInput.vue';
+import BaseSelect from '@/components/BaseSelect.vue';
 export default {
   name: "Signin",
   components: {
-    BaseInput
+    BaseInput,
+    BaseSelect
   },
   data() {
     return {

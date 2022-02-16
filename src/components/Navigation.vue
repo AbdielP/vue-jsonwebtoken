@@ -9,8 +9,6 @@
       aria-labelby="Logout">
       Logout
     </button>
-    {{isLoggedIn}}
-      {{getToken}}
   </nav>
 </template>
 

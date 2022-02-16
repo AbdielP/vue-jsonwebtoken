@@ -5,8 +5,8 @@
       >User data
       <hr />
       <ul v-if="userinfo">
-        <li>First name:</li>
-        <li>Lastname name:</li>
+        <li>First name: {{userinfo.firstname}}</li>
+        <li>Lastname name: {{userinfo.lastname}}</li>
         <li>Username: {{ userinfo.username }}</li>
         <li>Email: {{ userinfo.email }}</li>
       </ul>

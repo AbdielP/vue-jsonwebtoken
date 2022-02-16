@@ -10,8 +10,8 @@
         <BaseInput type="email" v-model="email" label="Email Address"/>
         <!-- Contact number -->
         <div class="display-flex">
-          <BaseSelect v-model="type"/>
-          <BaseInput v-model="number" label="Contact number"/>
+          <BaseSelect v-model="contactNumberType"/>
+          <BaseInput v-model="contactNumber" label="Contact number"/>
         </div>
         <!-- Extra contact number -->
         <div v-for="(row, index) in rows" :key="index" class="display-flex">
@@ -48,9 +48,9 @@ export default {
       lastname: "",
       username: "",
       password: "",
-      number: "",
+      contactNumber: "",
       email: "",
-      type: "",
+      contactNumberType: "",
       rows: [],
     };
   },
@@ -58,8 +58,8 @@ export default {
     async signIn() {
       try {
         const response = await fetch(
-          // `https://backend-node-server.herokuapp.com/api/vueforms/signin`,
-          `http://localhost:3000/api/vueforms/signin`,
+          `https://backend-node-server.herokuapp.com/api/vueforms/signin`,
+          // `http://localhost:3000/api/vueforms/signin`,
           {
             method: "POST",
             headers: {
@@ -70,9 +70,9 @@ export default {
               lastname: this.lastname,
               username: this.username,
               password: this.password,
-              number: this.number,
+              contactNumber: this.contactNumber,
               email: this.email,
-              type: this.type,
+              contactNumberType: this.contactNumberType,
               rows: this.rows,
             }),
           }

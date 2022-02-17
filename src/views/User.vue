@@ -36,15 +36,17 @@ export default {
           }
         );
         const data = await response.json();
-        !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user;;
+        console.log(data)
+        !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user;
       } catch (error) {
         console.log(error);
       }
     },
     errorHandler(err) {
+      console.log('bro, a ver..')
       if (err.name === "TokenExpiredError") {
-        this.setToken(null);
         localStorage.removeItem("jwtapptoken");
+        this.setToken(null);
         return this.$router.push("/auth/login");
       }
     },

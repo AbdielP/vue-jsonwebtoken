@@ -11,6 +11,12 @@
         <li>Email: {{ userinfo.email }}</li>
       </ul>
     </label>
+
+    <h2>Contact numbers</h2>
+    <p>{{userinfo.contactNumberType}}: {{userinfo.contactNumber}}</p>
+    <ul v-if="contactNumbers">
+      <li v-for="info in contactNumbers" :key="info.number">{{info.type}} - {{info.number}}</li>
+    </ul>
   </div>
 </template>
 
@@ -21,6 +27,7 @@ export default {
   data() {
     return {
       userinfo: "",
+      contactNumbers: []
     };
   },
   computed: {
@@ -37,7 +44,7 @@ export default {
         );
         const data = await response.json();
         console.log(data)
-        !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user;
+        !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user, this.contactNumbers = data.usernumbers;
       } catch (error) {
         console.log(error);
       }

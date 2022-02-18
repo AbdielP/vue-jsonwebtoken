@@ -50,7 +50,7 @@ export default {
       }
     },
     errorHandler(err) {
-      console.log('bro, a ver..')
+      console.log(err)
       if (err.name === "TokenExpiredError") {
         localStorage.removeItem("jwtapptoken");
         this.setToken(null);

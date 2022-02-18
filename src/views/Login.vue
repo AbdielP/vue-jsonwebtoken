@@ -1,8 +1,19 @@
 <template>
-  <div class="container">
+  <div class="main__container">
     <div class="container__background" />
-    <div class="container__form">
+    <div class="container__form display-flex">
       <h1 class="h1">Vue jasonwebtoken example</h1>
+      <div class="container">
+        <!-- ¿Y si mejor pones un div con un bg?  -->
+        <img class="img" src="../assets/img/vue-dynamic-forms.jpg" alt="Vue form"/>
+        <form class="form display-flex" @submit.prevent="login">
+          <input class="input input__text" v-model="username" placeholder="username" type="text"/>
+          <input class="input input__text" v-model="password" placeholder="password" type="password" autocomplete="true" />
+          <button class="input btn__login" type="submit">Login</button>
+        </form>
+        <router-link to="/auth/signin">Sign in</router-link>
+      </div>
+      <h2 class="h2">Made by @abdielpinzon - Vue CLI 3@</h2>
     </div>
   </div>
   <!-- <main class="main">
@@ -77,27 +88,67 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.main__container {
   background-color: #212F4F;
+  text-align: center;
   .container__background {
     background: url("../assets/img/background.png");
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center center;
-    opacity: 1;
-    -webkit-filter: blur(10px);
-    filter: blur(10px);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: .7;
     z-index: 1;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  }
+  .container__form, .input {
+      color: #FAFAFA;
   }
   .container__form {
-    background: red;
+    // background: red;
+    flex-direction: column;
     position: absolute;
+    width: 100%;
     z-index: 2;
+    .h1 {
+      padding: 50px 0 30px 0;
+    }
+    .container {
+      background: #1d2d40;
+      max-width: 675px;
+      padding: 15px;
+      margin: 15px;
+      margin-top: 0;
+      // margin: auto;
+      border-radius: 5px;
+      left: 0;
+      right: 0;
+      .img {
+        width: 40%;
+      }
+      .form {
+        flex-direction: column;
+        .input {
+          padding: 10px;
+          border-radius: 3px;
+        }
+        .input__text {
+          border: 1px solid #fafafa;
+          background-color: none;
+          // REMOVER EL BG
+          margin: 5px 0;
+        }
+        .btn__login {
+          background: #819FF7;
+          border: none;
+        }
+      }
+    }
   }
 }
 // .main {

@@ -20,6 +20,7 @@ export default {
 
 <style lang="scss">
 * {
+  font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   padding: 0;
   margin: 0;

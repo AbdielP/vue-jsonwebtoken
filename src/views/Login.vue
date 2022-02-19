@@ -13,12 +13,14 @@
         <div class="container__form display-flex">
           <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
           <form class="form display-flex" @submit.prevent="login">
+            <label class="label"></label> <!-- Username is required -->
             <input
               class="input input__text"
               v-model="username"
               placeholder="Username"
               type="text"
             />
+            <label class="label"></label> <!-- Password is required -->
             <input
               class="input input__text"
               v-model="password"
@@ -112,7 +114,6 @@ export default {
 }
 
 .section__form {
-  // background: red;
   color: var(--color-white);
   flex-direction: column;
   width: 100%;
@@ -132,7 +133,6 @@ export default {
 
 .container {
   background: var(--background-light);
-  // max-width: 675px;
   padding: 15px;
   margin: 15px;
   margin-top: 0;
@@ -152,13 +152,19 @@ export default {
 
 .h2 {
   font-size: 13px;
-  margin: 18px 0;
+  margin: 10px 0;
   color: var(--color-blue);
   letter-spacing: 1px;
 }
 
 .form {
   flex-direction: column;
+}
+
+.label {
+  color: var(--color-red);
+  font-size: 10px;
+  height: 14px;
 }
 
 .input {
@@ -178,16 +184,21 @@ export default {
   border: 1px solid var(--color-white);
   background: none;
   padding: 10px;
-  margin: 5px 0;
+}
+
+.input__text--error {
+  border: 1px solid var(--color-red);
 }
 
 .btn__login {
-  // background: #819ff7;
   background: var(--color-blue);
   font-weight: 900;
   cursor: pointer;
   border: none;
   margin: 25px 0;
+}.btn__login:hover, .btn__login:focus {
+  background: var(--color-blue-light);
+  transition: 0.3s ease-in-out;
 }
 
 .link {
@@ -195,7 +206,12 @@ export default {
   margin: 5px 0;
   color: var(--color-orange);
   font-style: italic;
+}.link:hover {
+  color: var(--color-orange-light);
+  transition: 0.3s ease-in-out;
 }
+
+
 .link__blue {
   color: var(--color-blue);
 }
@@ -208,51 +224,56 @@ export default {
 
 @media (min-width: 700px) {
   
-.h1 {
-  font-size: 2.6vw;
-  font-weight: 400;
-  padding: 5vw 0 3vw 0;
-}
+  .h1 {
+    font-size: 36px;
+    font-weight: 400;
+    padding: 4.5vw 0;
+  }
   
-.container {
-  display: flex;
-  width: 675px;
-}
-
-.container__img {
-  width: 30%;
-  position: relative;
-}
-
-.img {
-  position: absolute;
-  border-radius: 0;
-  width: 120%;
-  right: 3%;
-  bottom: .5%;
-}
-
   .container {
+    display: flex;
+    width: 675px;
     margin: auto;
   }
 
-.container__form {
-  width: 70%;
-  padding: 2vw;
-}
+  .container__img {
+    width: 30%;
+    position: relative;
+  }
 
-.h2, .paragraph, .link {
-  text-align: start;
-  font-size: 1vw;
-}
+  .img {
+    position: absolute;
+    border-radius: 0;
+    width: 110%;
+    right: 3%;
+    bottom: .5%;
+  }
 
+  .container__form {
+    width: 70%;
+    padding: .2vw .8vw .8vw;
+  }
 
-.h3 {
-  font-size: initial;
-  margin-top: 2.5vw;
-}
+  .label {
+    text-align: start;
+  }
 
+  .h2, .paragraph, .link {
+    text-align: start;
+  }
 
+  .paragraph {
+    font-size: 14px;
+  }
+
+  .link {
+    font-size: 14px;
+  }
+
+  .h3 {
+    font-size: initial;
+    margin-top: 2.5vw;
+  }
 }
 
 // https://kevin-powell.ck.page/87e4f27ed0

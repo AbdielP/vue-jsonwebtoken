@@ -25,12 +25,15 @@ export default {
   padding: 0;
   margin: 0;
 
+  --color-orange-light: #fa9e41;
+  --color-blue-light: #328add;
+  --background-light: #1d2d40;
   --color-orange: #FF8000;
   --color-white: #F2F2F2;
   --color-blue: #0174DF;
-  --color-gray: #ccc;
+  --color-red: #fa6565;
+  --color-gray: #CCC;
 
-  --background-light: #1d2d40;
 }
 
 .display-flex {

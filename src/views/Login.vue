@@ -1,37 +1,46 @@
 <template>
   <div class="main__container">
     <div class="container__background" />
-    <div class="container__form display-flex">
-      <h1 class="h1">Vue <span class="h1__span">jasonwebtoken</span> example</h1>
+    <section class="section__form display-flex">
+      <h1 class="h1">
+        Vue <span class="h1__span">jasonwebtoken</span> example
+      </h1>
+
       <div class="container">
-        <!-- ¿Y si mejor pones un div con un bg?  -->
-        <img
-          class="img"
-          src="../assets/img/BLANCO.png"
-          alt="Vue form"
-        />
-        <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
-        <form class="form display-flex" @submit.prevent="login">
-          <input
-            class="input input__text"
-            v-model="username"
-            placeholder="Username"
-            type="text"
-          />
-          <input
-            class="input input__text"
-            v-model="password"
-            placeholder="Password"
-            type="password"
-            autocomplete="true"
-          />
-          <button class="input btn__login" type="submit">LOGIN</button>
-        </form>
-        <p class="paragraph">Doesn't have an account yet?</p>
-        <router-link class="link" to="/auth/signin">Please register here...</router-link>
+        <div class="container__img">
+          <img class="img" src="../assets/img/ROSA.png" alt="Vue form" />
+        </div>
+        <div class="container__form display-flex">
+          <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
+          <form class="form display-flex" @submit.prevent="login">
+            <input
+              class="input input__text"
+              v-model="username"
+              placeholder="Username"
+              type="text"
+            />
+            <input
+              class="input input__text"
+              v-model="password"
+              placeholder="Password"
+              type="password"
+              autocomplete="true"
+            />
+            <button class="input btn__login" type="submit">LOGIN</button>
+          </form>
+          <p class="paragraph">Doesn't have an account yet?</p>
+          <router-link class="link" to="/auth/signin"
+            >Please register here...</router-link
+          >
+        </div>
       </div>
-      <h3 class="h3">Made in Vue CLI 3@ by <a class="link link__blue" href="https://github.com/AbdielP">@abdielpinzon</a></h3>
-    </div>
+
+      <!-- <h3 class="h3">Made in Vue CLI 3@ by <a class="link link__blue" href="https://github.com/AbdielP">@abdielpinzon</a></h3> -->
+      <h3 class="h3">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis,
+        explicabo?
+      </h3>
+    </section>
   </div>
 </template>
 
@@ -84,7 +93,7 @@ export default {
   text-align: center;
 }
 .container__background,
-.container__form {
+.section__form {
   position: absolute;
 }
 .container__background {
@@ -102,7 +111,8 @@ export default {
   -webkit-filter: blur(8px);
 }
 
-.container__form {
+.section__form {
+  // background: red;
   color: var(--color-white);
   flex-direction: column;
   width: 100%;
@@ -110,6 +120,7 @@ export default {
 }
 
 .h1 {
+  font-size: 32px;
   font-weight: 400;
   padding: 50px 0 30px 0;
 }
@@ -121,14 +132,17 @@ export default {
 
 .container {
   background: var(--background-light);
-  max-width: 675px;
+  // max-width: 675px;
   padding: 15px;
   margin: 15px;
   margin-top: 0;
-  // margin: auto;
   border-radius: 5px;
   left: 0;
   right: 0;
+}
+
+.container__form {
+  flex-direction: column;
 }
 
 .img {
@@ -153,8 +167,8 @@ export default {
   color: var(--color-white);
 }
 
-.input__text, 
-.btn__login, 
+.input__text,
+.btn__login,
 .paragraph,
 .h1 {
   letter-spacing: 1.2px;
@@ -181,14 +195,64 @@ export default {
   margin: 5px 0;
   color: var(--color-orange);
   font-style: italic;
-}.link__blue {
+}
+.link__blue {
   color: var(--color-blue);
 }
 
 .h3 {
-  margin-top: 20px;
+  margin: 20px 10px;
   font-weight: 400;
   font-size: 15px;
+}
+
+@media (min-width: 700px) {
+  
+.h1 {
+  font-size: 2.6vw;
+  font-weight: 400;
+  padding: 5vw 0 3vw 0;
+}
+  
+.container {
+  display: flex;
+  width: 675px;
+}
+
+.container__img {
+  width: 30%;
+  position: relative;
+}
+
+.img {
+  position: absolute;
+  border-radius: 0;
+  width: 120%;
+  right: 3%;
+  bottom: .5%;
+}
+
+  .container {
+    margin: auto;
+  }
+
+.container__form {
+  width: 70%;
+  padding: 2vw;
+}
+
+.h2, .paragraph, .link {
+  text-align: start;
+  font-size: 1vw;
+}
+
+
+.h3 {
+  font-size: initial;
+  margin-top: 2.5vw;
+}
+
+
 }
 
 // https://kevin-powell.ck.page/87e4f27ed0

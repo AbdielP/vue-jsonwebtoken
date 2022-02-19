@@ -2,46 +2,37 @@
   <div class="main__container">
     <div class="container__background" />
     <div class="container__form display-flex">
-      <h1 class="h1">Vue jasonwebtoken example</h1>
+      <h1 class="h1">Vue <span class="h1__span">jasonwebtoken</span> example</h1>
       <div class="container">
         <!-- ¿Y si mejor pones un div con un bg?  -->
-        <img class="img" src="../assets/img/vue-dynamic-forms.jpg" alt="Vue form"/>
+        <img
+          class="img"
+          src="../assets/img/BLANCO.png"
+          alt="Vue form"
+        />
+        <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
         <form class="form display-flex" @submit.prevent="login">
-          <input class="input input__text" v-model="username" placeholder="username" type="text"/>
-          <input class="input input__text" v-model="password" placeholder="password" type="password" autocomplete="true" />
-          <button class="input btn__login" type="submit">Login</button>
-        </form>
-        <router-link to="/auth/signin">Sign in</router-link>
-      </div>
-      <h2 class="h2">Made by @abdielpinzon - Vue CLI 3@</h2>
-    </div>
-  </div>
-  <!-- <main class="main">
-    <div class="background"></div>
-    <div class="container display-flex">
-      <h1 class="h1">Vue jasonwebtoken example</h1>
-      <img
-        class="container__img"
-        src="../assets/img/vue-dynamic-forms.jpg"
-        alt="Vue form"
-      />
-      <div class="container__form">
-        <h2>Login form</h2>
-        <form class="form display-flex" @submit.prevent="login">
-          <input v-model="username" placeholder="username" />
           <input
+            class="input input__text"
+            v-model="username"
+            placeholder="Username"
+            type="text"
+          />
+          <input
+            class="input input__text"
             v-model="password"
-            placeholder="password"
+            placeholder="Password"
             type="password"
             autocomplete="true"
           />
-          <button type="submit">Login</button>
+          <button class="input btn__login" type="submit">LOGIN</button>
         </form>
-        <router-link to="/auth/signin">Sign in</router-link>
+        <p class="paragraph">Doesn't have an account yet?</p>
+        <router-link class="link" to="/auth/signin">Please register here...</router-link>
       </div>
+      <h3 class="h3">Made in Vue CLI 3@ by <a class="link link__blue" href="https://github.com/AbdielP">@abdielpinzon</a></h3>
     </div>
-    <h2 class="h2">Made by @abdielpinzon - Vue CLI 3@</h2>
-  </main> -->
+  </div>
 </template>
 
 <script>
@@ -89,110 +80,116 @@ export default {
 
 <style lang="scss">
 .main__container {
-  background-color: #212F4F;
+  background-color: #212f4f;
   text-align: center;
-  .container__background {
-    background: url("../assets/img/background.png");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-    opacity: .7;
-    z-index: 1;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-  }
-  .container__form, .input {
-      color: #FAFAFA;
-  }
-  .container__form {
-    // background: red;
-    flex-direction: column;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-    .h1 {
-      padding: 50px 0 30px 0;
-    }
-    .container {
-      background: #1d2d40;
-      max-width: 675px;
-      padding: 15px;
-      margin: 15px;
-      margin-top: 0;
-      // margin: auto;
-      border-radius: 5px;
-      left: 0;
-      right: 0;
-      .img {
-        width: 40%;
-      }
-      .form {
-        flex-direction: column;
-        .input {
-          padding: 10px;
-          border-radius: 3px;
-        }
-        .input__text {
-          border: 1px solid #fafafa;
-          background-color: none;
-          // REMOVER EL BG
-          margin: 5px 0;
-        }
-        .btn__login {
-          background: #819FF7;
-          border: none;
-        }
-      }
-    }
-  }
 }
-// .main {
-//   width: 100%;
-//   height: 100vh;
-//   background: #000;
-//   .background {
-//     background: url("../assets/img/background.png");
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-//     left: 0;
-//     right: 0;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     background-position: center center;
-//     opacity: 1;
-//     -webkit-filter: blur(10px);
-//     filter: blur(10px);
-//     z-index: 1;
-//   }
-  
-//   .container {
-//     background: cadetblue;
-//     margin: 0 auto;
-//     width: 600px;
-//     z-index: 100;
-//     h1,
-//     h2 {
-//       text-align: center;
-//     }
-//     .h1 {
-//       text-align: center;
-//       padding: 60px 0;
-//     }
-//     .container__img {
-//       width: 40%;
-//     }
-//     .container__form {
-//       .form {
-//         flex-direction: column;
-//       }
-//     }
-//   }
-// }
+.container__background,
+.container__form {
+  position: absolute;
+}
+.container__background {
+  background: url("../assets/img/background.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+  z-index: 1;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+
+.container__form {
+  color: var(--color-white);
+  flex-direction: column;
+  width: 100%;
+  z-index: 2;
+}
+
+.h1 {
+  font-weight: 400;
+  padding: 50px 0 30px 0;
+}
+
+.h1__span {
+  color: var(--color-gray);
+  font-weight: 900;
+}
+
+.container {
+  background: var(--background-light);
+  max-width: 675px;
+  padding: 15px;
+  margin: 15px;
+  margin-top: 0;
+  // margin: auto;
+  border-radius: 5px;
+  left: 0;
+  right: 0;
+}
+
+.img {
+  width: 62%;
+  border-radius: 10px 0;
+}
+
+.h2 {
+  font-size: 13px;
+  margin: 18px 0;
+  color: var(--color-blue);
+  letter-spacing: 1px;
+}
+
+.form {
+  flex-direction: column;
+}
+
+.input {
+  padding: 15px 10px;
+  border-radius: 5px;
+  color: var(--color-white);
+}
+
+.input__text, 
+.btn__login, 
+.paragraph,
+.h1 {
+  letter-spacing: 1.2px;
+}
+
+.input__text {
+  border: 1px solid var(--color-white);
+  background: none;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.btn__login {
+  // background: #819ff7;
+  background: var(--color-blue);
+  font-weight: 900;
+  cursor: pointer;
+  border: none;
+  margin: 25px 0;
+}
+
+.link {
+  display: block;
+  margin: 5px 0;
+  color: var(--color-orange);
+  font-style: italic;
+}.link__blue {
+  color: var(--color-blue);
+}
+
+.h3 {
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 15px;
+}
+
 // https://kevin-powell.ck.page/87e4f27ed0
 </style>

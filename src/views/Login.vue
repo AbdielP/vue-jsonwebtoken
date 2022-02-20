@@ -14,21 +14,10 @@
           <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
           <form class="form display-flex" @submit.prevent="login">
             <label class="label"></label> <!-- Username is required -->
-            <input
-              class="input input__text"
-              v-model="username"
-              placeholder="Username"
-              type="text"
-            />
+            <BaseInput v-model="username" label="Username"/>
             <label class="label"></label> <!-- Password is required -->
-            <input
-              class="input input__text"
-              v-model="password"
-              placeholder="Password"
-              type="password"
-              autocomplete="on"
-            />
-            <button class="input btn__login" type="submit">LOGIN</button>
+            <BaseInput type="password" v-model="password" label="Password" autocomplete="on" />
+            <button class="btn__login" type="submit">LOGIN</button>
           </form>
           <p class="paragraph">Doesn't have an account yet?</p>
           <router-link class="link" to="/auth/signin"
@@ -48,11 +37,13 @@
 
 <script>
 import Background from '@/components/Background.vue';
+import BaseInput from '@/components/BaseInput.vue';
 import { mapMutations } from "vuex";
 export default {
   name: "Login",
   components: {
-    Background
+    Background,
+    BaseInput
   },
   data() {
     return {
@@ -140,30 +131,20 @@ export default {
   height: 14px;
 }
 
-.input {
-  padding: 15px 10px;
-  border-radius: 5px;
-  color: var(--color-white);
-}
-
-.input__text,
 .btn__login,
 .paragraph,
 .h1 {
   letter-spacing: 1.2px;
 }
 
-.input__text {
-  border: 1px solid var(--color-white);
-  background: none;
-  padding: 10px;
-}
-
-.input__text--error {
+.input-text--error {
   border: 1px solid var(--color-red);
 }
 
 .btn__login {
+  padding: 15px 10px;
+  border-radius: 5px;
+  color: var(--color-white);
   background: var(--color-blue);
   font-weight: 900;
   cursor: pointer;

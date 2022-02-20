@@ -1,6 +1,7 @@
 <template>
   <main>
-    <h1>Create account!</h1>
+    <Background />
+    <h1 class="h1">Create account!</h1>
     <section class="section__form">
       <form @submit.prevent="signIn" class="form display-flex">
         <BaseInput v-model="firstname" label="First Name"/>
@@ -35,11 +36,13 @@
 
 <script>
 import BaseInput from '@/components/BaseInput.vue';
+import Background from '@/components/Background.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 export default {
   name: "Signin",
   components: {
     BaseInput,
+    Background,
     BaseSelect
   },
   data() {
@@ -96,14 +99,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.form {
+  margin: 15px;
+  padding: 15px;
+  flex-direction: column;
+  background: var(--background-light);
+}
 h1 {
   text-align: center;
-}
-.section__form {
-  margin: auto;
-  width: 50%;
-  .form {
-    flex-direction: column;
-  }
 }
 </style>

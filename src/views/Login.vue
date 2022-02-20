@@ -1,6 +1,6 @@
 <template>
   <div class="main__container">
-    <div class="container__background" />
+    <Background />
     <section class="section__form display-flex">
       <h1 class="h1">
         Vue <span class="h1__span">jasonwebtoken</span> example
@@ -47,9 +47,13 @@
 </template>
 
 <script>
+import Background from '@/components/Background.vue';
 import { mapMutations } from "vuex";
 export default {
   name: "Login",
+  components: {
+    Background
+  },
   data() {
     return {
       username: "",
@@ -89,41 +93,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main__container {
-  background-color: #212f4f;
+  background-color: var(--color-background);
   text-align: center;
-}
-.container__background,
-.section__form {
-  position: absolute;
-}
-.container__background {
-  background: url("../assets/img/background.png");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0.7;
-  z-index: 1;
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-}
-
-.section__form {
-  color: var(--color-white);
-  flex-direction: column;
-  width: 100%;
-  z-index: 2;
-}
-
-.h1 {
-  font-size: 32px;
-  font-weight: 400;
-  padding: 50px 0 30px 0;
 }
 
 .h1__span {
@@ -211,7 +184,6 @@ export default {
   transition: 0.3s ease-in-out;
 }
 
-
 .link__blue {
   color: var(--color-blue);
 }
@@ -222,14 +194,7 @@ export default {
   font-size: 15px;
 }
 
-@media (min-width: 700px) {
-  
-  .h1 {
-    font-size: 36px;
-    font-weight: 400;
-    padding: 4.5vw 0;
-  }
-  
+@media (min-width: 700px) {  
   .container {
     display: flex;
     width: 675px;

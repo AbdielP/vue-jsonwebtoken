@@ -13,9 +13,9 @@
         <div class="container__form display-flex">
           <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
           <form class="form display-flex" @submit.prevent="login">
-            <label class="label"></label> <!-- Username is required -->
+            <label class="label__error"></label> <!-- Username is required -->
             <BaseInput v-model="username" label="Username"/>
-            <label class="label"></label> <!-- Password is required -->
+            <label class="label__error"></label> <!-- Password is required -->
             <BaseInput type="password" v-model="password" label="Password" autocomplete="on" />
             <button class="btn__login" type="submit">LOGIN</button>
           </form>
@@ -125,20 +125,10 @@ export default {
   flex-direction: column;
 }
 
-.label {
-  color: var(--color-red);
-  font-size: 10px;
-  height: 14px;
-}
-
 .btn__login,
 .paragraph,
 .h1 {
   letter-spacing: 1.2px;
-}
-
-.input-text--error {
-  border: 1px solid var(--color-red);
 }
 
 .btn__login {
@@ -198,10 +188,6 @@ export default {
   .container__form {
     width: 70%;
     padding: .2vw .8vw .8vw;
-  }
-
-  .label {
-    text-align: start;
   }
 
   .h2, .paragraph, .link {

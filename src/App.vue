@@ -54,11 +54,25 @@ export default {
   padding: 50px 0 30px 0;
 }
 
+.label__error {
+  color: var(--color-red);
+  font-size: 10px;
+  height: 14px;
+}
+
+.input-text--error {
+  border: 1px solid var(--color-red);
+}
+
 @media (min-width: 700px) {
   .h1 {
     font-size: 36px;
     font-weight: 400;
     padding: 4.5vw 0;
+  }
+
+  .label__error {
+    text-align: start;
   }
 }
 </style>

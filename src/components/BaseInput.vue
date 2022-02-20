@@ -34,8 +34,9 @@ export default {
   border: 1px solid var(--color-white);
   color: var(--color-white);
   letter-spacing: 1.2px;
-  padding: 10px;
   border-radius: 5px;
   background: none;
+  padding: 10px;
+//   width: 100%;
 }
 </style>

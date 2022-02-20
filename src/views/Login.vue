@@ -26,7 +26,7 @@
               v-model="password"
               placeholder="Password"
               type="password"
-              autocomplete="true"
+              autocomplete="on"
             />
             <button class="input btn__login" type="submit">LOGIN</button>
           </form>

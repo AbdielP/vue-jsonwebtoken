@@ -7,7 +7,13 @@
         <BaseInput v-model="firstname" label="First Name"/>
         <BaseInput v-model="lastname" label="Last Name"/>
         <BaseInput v-model="username" label="Username"/>
-        <BaseInput type="password" v-model="password" label="Password"/>
+        <BaseInput type="password" v-model="password" label="Password" autocomplete="off" />
+        <div class="container__radio">
+          <input v-model="gender" type="radio" value="male" id="male">
+          <label for="male">Male</label>
+          <input v-model="gender" type="radio" value="female" id="female">
+          <label for="female">Female</label>
+        </div>
         <BaseInput type="email" v-model="email" label="Email Address"/>
         <!-- Contact number -->
         <div class="display-flex">
@@ -51,6 +57,7 @@ export default {
       lastname: "",
       username: "",
       password: "",
+      gender: "",
       contactNumber: "",
       email: "",
       contactNumberType: "",
@@ -73,6 +80,7 @@ export default {
               lastname: this.lastname,
               username: this.username,
               password: this.password,
+              gender: this.gender,
               contactNumber: this.contactNumber,
               email: this.email,
               contactNumberType: this.contactNumberType,

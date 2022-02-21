@@ -37,6 +37,6 @@ export default {
   border-radius: 5px;
   background: none;
   padding: 10px;
-//   width: 100%;
+  // width: 100%;
 }
 </style>

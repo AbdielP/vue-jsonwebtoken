@@ -27,7 +27,8 @@ export default {
   margin-right: 3px;
   background: none;
   padding: 10px;
-  // width: 50%;
+  width: auto;
+  // width: 100%;
 }
 
 .option {

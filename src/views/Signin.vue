@@ -68,8 +68,8 @@
               <label class="label__error">Please select and option or insert a number</label> <!-- Please select and option or insert a number -->
               <!-- Contact number -->
               <div class="container__phone display-flex">
-                <BaseSelect v-model="contactNumberType"/>
-                <BaseInput v-model="contactNumber" label="Contact number" />
+                <BaseSelect class="test" v-model="contactNumberType"/>
+                <BaseInput class="test2" v-model="contactNumber" label="Contact number" />
               </div>
             </div>
           </div>
@@ -79,8 +79,8 @@
             <div class="container__label display-flex">
               <!-- Extra contact number -->
               <div class="container__phone display-flex" v-for="(row, index) in rows" :key="index">
-                <BaseSelect v-model="row.type"/>
-                <BaseInput v-model="row.number" label="Contact number"/>
+                <BaseSelect class="test" v-model="row.type"/>
+                <BaseInput class="test2" v-model="row.number" label="Contact number"/>
                 <button class="btn__remove"
                   @click="removeRow(index)"
                   type="button"
@@ -91,7 +91,7 @@
             </div>
           </div>
           
-          <button class="btn__phone btn__main w-50" @click="addRow" type="button" aria-labelledby="Add phone">
+          <button class="btn__phone btn__main" @click="addRow" type="button" aria-labelledby="Add phone">
             Add phone
           </button>
         </section>
@@ -174,6 +174,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.test {
+  width: 30%;
+}.test2 {
+  width: 60%;
+}
 h1 {
   text-align: center;
 }
@@ -306,6 +311,7 @@ h1 {
   color: var(--color-blue);
   margin-top: 3px;
   padding: 8px;
+  width: 30%;
 }
 
 .btn__remove {
@@ -321,6 +327,9 @@ h1 {
 }
 
 @media (min-width: 700px) {
+  // .test {
+  //   width: 200px;
+  // }
   .form {
     margin: 0 auto;
   }

@@ -13,11 +13,15 @@
         <div class="container__form display-flex">
           <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
           <form class="form display-flex" @submit.prevent="login">
-            <label class="label__error"></label> <!-- Username is required -->
-            <BaseInput v-model="username" label="Username"/>
-            <label class="label__error"></label> <!-- Password is required -->
-            <BaseInput type="password" v-model="password" label="Password" autocomplete="on" />
-            <button class="btn__main btn__login" type="submit">LOGIN</button>
+            <label class="label__error">
+              <p v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</p>
+            </label> <!-- Username is required -->
+            <BaseInput v-model="v$.form.username.$model" label="Username" :class="{ input__error: v$.form.username.$errors.length }" />
+            <label class="label__error">
+              <p v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</p>  
+            </label> <!-- Password is required -->
+            <BaseInput type="password" v-model="v$.form.password.$model" label="Password" autocomplete="on" :class="{ input__error: v$.form.password.$errors.length }" />
+            <button :disabled="v$.form.$invalid" class="btn__main btn__login" type="submit">LOGIN</button>
           </form>
           <p class="paragraph">Doesn't have an account yet?</p>
           <router-link class="link" to="/auth/signin"
@@ -28,8 +32,7 @@
 
       <!-- <h3 class="h3">Made in Vue CLI 3@ by <a class="link link__blue" href="https://github.com/AbdielP">@abdielpinzon</a></h3> -->
       <h3 class="h3">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis,
-        explicabo?
+        A VueJS jasonwebtoken application with form validations
       </h3>
     </section>
   </div>
@@ -39,16 +42,23 @@
 import Background from '@/components/Background.vue';
 import BaseInput from '@/components/BaseInput.vue';
 import { mapMutations } from "vuex";
+import useVuelidate from '@vuelidate/core'
+import { required, minLength  } from '@vuelidate/validators'
 export default {
   name: "Login",
   components: {
     Background,
     BaseInput
   },
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
-      username: "",
-      password: "",
+      form: {
+        username: "",
+        password: "",
+      }
     };
   },
   methods: {
@@ -64,8 +74,8 @@ export default {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              username: this.username,
-              password: this.password,
+              username: this.form.username,
+              password: this.form.password,
             }),
           }
         );
@@ -81,6 +91,18 @@ export default {
       this.$router.push("/auth/me");
     },
   },
+  validations () {
+    return {
+      form: {
+        username: { 
+          required
+        },
+        password: {
+           required 
+        }
+      }
+    }
+  }
 };
 </script>
 
@@ -112,6 +134,12 @@ export default {
 .img {
   width: 62%;
   border-radius: 10px 0;
+}
+
+.h1 {
+  font-size: 32px;
+  font-weight: 400;
+  padding: 50px 0 30px 0;
 }
 
 .h2 {
@@ -158,7 +186,14 @@ export default {
   font-size: 15px;
 }
 
-@media (min-width: 700px) {  
+@media (min-width: 700px) { 
+
+  .h1 {
+    font-size: 36px;
+    font-weight: 400;
+    padding: 4.5vw 0;
+  }
+
   .container {
     display: flex;
     width: 675px;

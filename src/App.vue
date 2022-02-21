@@ -48,20 +48,16 @@ export default {
   z-index: 2;
 }
 
-.h1 {
-  font-size: 32px;
-  font-weight: 400;
-  padding: 50px 0 30px 0;
-}
-
 .label__error {
+  letter-spacing: 1px;
   color: var(--color-red);
-  font-size: 10px;
-  height: 14px;
+  font-size: 12px;
+  height: 18px;
+  padding: 2px 0;
 }
 
-.input-text--error {
-  border: 1px solid var(--color-red);
+.input__error {
+  border: 1px solid var(--color-red)!important;
 }
 
 .btn__main {
@@ -73,15 +69,13 @@ export default {
 }.btn__main:hover, .btn__main:focus {
   background: var(--color-blue-light);
   transition: 0.3s ease-in-out;
+}.btn__main:disabled {
+  background: var(--color-blue-light);
+  cursor: initial;
+  opacity: .3;
 }
 
 @media (min-width: 700px) {
-  .h1 {
-    font-size: 36px;
-    font-weight: 400;
-    padding: 4.5vw 0;
-  }
-
   .label__error {
     text-align: start;
   }

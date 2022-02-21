@@ -64,6 +64,17 @@ export default {
   border: 1px solid var(--color-red);
 }
 
+.btn__main {
+  background: var(--color-blue);
+  color: var(--color-white);
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}.btn__main:hover, .btn__main:focus {
+  background: var(--color-blue-light);
+  transition: 0.3s ease-in-out;
+}
+
 @media (min-width: 700px) {
   .h1 {
     font-size: 36px;

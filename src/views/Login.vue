@@ -17,7 +17,7 @@
             <BaseInput v-model="username" label="Username"/>
             <label class="label__error"></label> <!-- Password is required -->
             <BaseInput type="password" v-model="password" label="Password" autocomplete="on" />
-            <button class="btn__login" type="submit">LOGIN</button>
+            <button class="btn__main btn__login" type="submit">LOGIN</button>
           </form>
           <p class="paragraph">Doesn't have an account yet?</p>
           <router-link class="link" to="/auth/signin"
@@ -134,15 +134,8 @@ export default {
 .btn__login {
   padding: 15px 10px;
   border-radius: 5px;
-  color: var(--color-white);
-  background: var(--color-blue);
   font-weight: 900;
-  cursor: pointer;
-  border: none;
   margin: 25px 0;
-}.btn__login:hover, .btn__login:focus {
-  background: var(--color-blue-light);
-  transition: 0.3s ease-in-out;
 }
 
 .link {

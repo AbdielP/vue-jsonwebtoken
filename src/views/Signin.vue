@@ -68,8 +68,8 @@
               <label class="label__error">Please select and option or insert a number</label> <!-- Please select and option or insert a number -->
               <!-- Contact number -->
               <div class="container__phone display-flex">
-                <BaseSelect class="test" v-model="contactNumberType"/>
-                <BaseInput class="test2" v-model="contactNumber" label="Contact number" />
+                <BaseSelect class="select__width" v-model="contactNumberType"/>
+                <BaseInput class="input__width" v-model="contactNumber" label="Contact number" />
               </div>
             </div>
           </div>
@@ -79,8 +79,8 @@
             <div class="container__label display-flex">
               <!-- Extra contact number -->
               <div class="container__phone display-flex" v-for="(row, index) in rows" :key="index">
-                <BaseSelect class="test" v-model="row.type"/>
-                <BaseInput class="test2" v-model="row.number" label="Contact number"/>
+                <BaseSelect class="select__width" v-model="row.type"/>
+                <BaseInput class="input__width" v-model="row.number" label="Contact number"/>
                 <button class="btn__remove"
                   @click="removeRow(index)"
                   type="button"
@@ -97,6 +97,12 @@
         </section>
         <button type="submit" class="btn__main btn__submit">CREATE ACCOUNT</button>
       </form>
+      <div class="link__container">
+        <router-link class="link__login display-flex" to="/auth/login">
+          <img class="img__arrow" src="../assets/svg/arrow-left-long-solid.svg" alt="Arrow left">
+          BACK TO LOGIN
+        </router-link>
+      </div>
     </div>
   </main>
 </template>
@@ -174,13 +180,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test {
-  width: 30%;
-}.test2 {
-  width: 60%;
-}
 h1 {
   text-align: center;
+  font-weight: 400;
+  margin: 70px 0 25px;
 }
 
 .h2 {
@@ -216,7 +219,8 @@ h1 {
 .span__gender, 
 .btn__phone,
 .btn__submit,
-.label__radio  {
+.label__radio,
+.link__login  {
   letter-spacing: 1.2px;
 }
 
@@ -311,7 +315,7 @@ h1 {
   color: var(--color-blue);
   margin-top: 3px;
   padding: 8px;
-  width: 30%;
+  width: 90.6%;
 }
 
 .btn__remove {
@@ -326,11 +330,36 @@ h1 {
   font-weight: 900;
 }
 
+.select__width {
+  width: 30%;
+}.input__width {
+  width: 60%;
+}
+
+.link__container {
+  // background: green;
+  margin: 15px;
+  max-width: 700px;
+}
+
+.link__login {
+  font-weight: 900;
+  font-size: 14px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-blue);
+  // background: rebeccapurple;
+}
+
+.img__arrow {
+  filter: invert(35%) sepia(70%) saturate(4869%) hue-rotate(195deg) brightness(94%) contrast(99%);
+  margin-right: 10px;
+  width: 25px;
+}
+
 @media (min-width: 700px) {
-  // .test {
-  //   width: 200px;
-  // }
-  .form {
+  .form, 
+  .link__container {
     margin: 0 auto;
   }
   .container__input {
@@ -339,6 +368,14 @@ h1 {
 
   .container__label {
     padding: 3px;
+  }
+
+  .btn__phone {
+    width: 30%;
+  }
+
+  .link__login {
+    margin: 15px auto 0;
   }
 
   .w-50 {

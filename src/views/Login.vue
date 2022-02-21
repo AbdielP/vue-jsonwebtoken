@@ -41,9 +41,9 @@
 <script>
 import Background from '@/components/Background.vue';
 import BaseInput from '@/components/BaseInput.vue';
-import { mapMutations } from "vuex";
 import useVuelidate from '@vuelidate/core'
-import { required, minLength  } from '@vuelidate/validators'
+import { mapMutations } from "vuex";
+import { required } from '@vuelidate/validators'
 export default {
   name: "Login",
   components: {

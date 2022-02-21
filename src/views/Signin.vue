@@ -11,24 +11,32 @@
           <!-- First row -->
           <div class="container__input display-flex">
             <div class="container__label display-flex">
-              <label class="label__error">First name is required</label> <!-- First name is required -->
-              <BaseInput v-model="firstname" label="First Name"/>
+              <label class="label__error">
+                <p v-for="(error, index) of v$.form.firstname.$errors" :key="index">{{ error.$message }}</p>
+              </label> <!-- First name is required -->
+              <BaseInput :class="{ input__error: v$.form.firstname.$errors.length }" v-model="v$.form.firstname.$model" label="First Name"/>
             </div>
             <div class="container__label display-flex">
-              <label class="label__error">Last name is required</label> <!-- Last name is required -->
-              <BaseInput v-model="lastname" label="Last Name"/>
+              <label class="label__error">
+                <p v-for="(error, index) of v$.form.lastname.$errors" :key="index">{{ error.$message }}</p>
+              </label> <!-- Last name is required -->
+              <BaseInput :class="{ input__error: v$.form.lastname.$errors.length }" v-model="v$.form.lastname.$model" label="Last Name"/>
             </div>
           </div>
 
           <!-- Second row -->
           <div class="container__input display-flex">
             <div class="container__label display-flex">
-              <label class="label__error">Username is required</label> <!-- Username is required -->
-              <BaseInput v-model="username" label="Username"/>
+              <label class="label__error">
+                <p v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</p>  
+              </label> <!-- Username is required -->
+              <BaseInput :class="{ input__error: v$.form.username.$errors.length }" v-model="v$.form.username.$model" label="Username"/>
             </div>
             <div class="container__label display-flex">
-              <label class="label__error">Password is required</label> <!-- Password is required -->
-              <BaseInput type="password" v-model="password" label="Password" autocomplete="off" />
+              <label class="label__error">
+                <p v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</p>  
+              </label> <!-- Password is required -->
+              <BaseInput :class="{ input__error: v$.form.password.$errors.length }" type="password" v-model="v$.form.password.$model" label="Password" autocomplete="off" />
             </div>
           </div>
 
@@ -38,15 +46,17 @@
               <span class="span__gender">Select a gender</span>
               <div class="container__radio display-flex">
                 <label class="label__radio">Male
-                  <input class="input__radio" v-model="gender" type="radio" value="male">
+                  <input class="input__radio" :class="{ input__error: v$.form.gender.$errors.length }" v-model="v$.form.gender.$model" type="radio" value="male">
                   <span class="radio__span"></span>
                 </label>
                 <label class="label__radio">Female
-                  <input class="input__radio" v-model="gender" type="radio" value="female">
+                  <input class="input__radio" :class="{ input__error: v$.form.gender.$errors.length }" v-model="v$.form.gender.$model" type="radio" value="female">
                   <span class="radio__span"></span>
                 </label>
               </div>
-            <label class="label__error">Gender is required</label> <!-- Gender is required -->
+            <label class="label__error">
+              <p v-for="(error, index) of v$.form.gender.$errors" :key="index">{{ error.$message }}</p>
+            </label> <!-- Gender is required -->
             </div>
           </div>
         </section>
@@ -57,19 +67,24 @@
           <!-- Fourth row -->
           <div class="container__input display-flex">
             <div class="container__label display-flex">
-              <label class="label__error">Email is required</label> <!-- Email is required -->
-              <BaseInput type="email" v-model="email" label="Email Address"/>
+              <label class="label__error">
+                <p v-for="(error, index) of v$.form.email.$errors" :key="index">{{ error.$message }}</p>
+              </label> <!-- Email is required -->
+              <BaseInput :class="{ input__error: v$.form.email.$errors.length }" type="email" v-model="v$.form.email.$model" label="Email Address"/>
             </div>
           </div>
 
           <!-- Fifth row -->
           <div class="container__input display-flex">
             <div class="container__label display-flex">
-              <label class="label__error">Please select and option or insert a number</label> <!-- Please select and option or insert a number -->
+              <label class="label__error">
+                <p v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</p>
+                <p v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</p>
+              </label> <!-- Please select and option or insert a number -->
               <!-- Contact number -->
               <div class="container__phone display-flex">
-                <BaseSelect class="select__width" v-model="contactNumberType"/>
-                <BaseInput class="input__width" v-model="contactNumber" label="Contact number" />
+                <BaseSelect class="select__width" :class="{ input__error: v$.form.contactNumberType.$errors.length }" v-model="v$.form.contactNumberType.$model"/>
+                <BaseInput class="input__width" :class="{ input__error: v$.form.contactNumber.$errors.length }" v-model="v$.form.contactNumber.$model" label="Contact number" />
               </div>
             </div>
           </div>
@@ -78,7 +93,7 @@
           <div class="container__input display-flex">
             <div class="container__label display-flex">
               <!-- Extra contact number -->
-              <div class="container__phone display-flex" v-for="(row, index) in rows" :key="index">
+              <div class="container__phone display-flex" v-for="(row, index) in form.rows" :key="index">
                 <BaseSelect class="select__width" v-model="row.type"/>
                 <BaseInput class="input__width" v-model="row.number" label="Contact number"/>
                 <button class="btn__remove"
@@ -95,7 +110,7 @@
             Add phone
           </button>
         </section>
-        <button type="submit" class="btn__main btn__submit">CREATE ACCOUNT</button>
+        <button :disabled="v$.form.$invalid" type="submit" class="btn__main btn__submit">CREATE ACCOUNT</button>
       </form>
       <div class="link__container">
         <router-link class="link__login display-flex" to="/auth/login">
@@ -111,6 +126,8 @@
 import BaseInput from '@/components/BaseInput.vue';
 import Background from '@/components/Background.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
+import useVuelidate from '@vuelidate/core'
+import { required, minLength, maxLength, alpha, alphaNum, email, sameAs } from '@vuelidate/validators'
 export default {
   name: "Signin",
   components: {
@@ -118,23 +135,23 @@ export default {
     Background,
     BaseSelect
   },
+  setup () {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
-      firstname: "",
-      lastname: "",
-      username: "",
-      password: "",
-      gender: "",
-      contactNumber: "",
-      email: "",
-      contactNumberType: "",
-      rows: [],
+      form: {
+        firstname: "",
+        lastname: "",
+        username: "",
+        password: "",
+        gender: "",
+        contactNumber: "",
+        email: "",
+        contactNumberType: "",
+        rows: [],
+      },
     };
-  },
-  computed: {
-    btnDisabled() {
-      return this.disabled;
-    }
   },
   methods: {
     async signIn() {
@@ -148,15 +165,15 @@ export default {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              firstname: this.firstname,
-              lastname: this.lastname,
-              username: this.username,
-              password: this.password,
-              gender: this.gender,
-              contactNumber: this.contactNumber,
-              email: this.email,
-              contactNumberType: this.contactNumberType,
-              rows: this.rows,
+              firstname: this.form.firstname,
+              lastname: this.form.lastname,
+              username: this.form.username,
+              password: this.form.password,
+              gender: this.form.gender,
+              contactNumber: this.form.contactNumber,
+              email: this.form.email,
+              contactNumberType: this.form.contactNumberType,
+              rows: this.form.rows,
             }),
           }
         );
@@ -165,17 +182,58 @@ export default {
       } catch (error) {}
     },
     addRow() {
-      if(this.rows.length < 3) {
-        this.rows.push({
+      if(this.form.rows.length < 3) {
+        this.form.rows.push({
           type: "",
           number: "",
         });
       }
     },
     removeRow(index) {
-      this.rows.splice(index, 1);
+      this.form.rows.splice(index, 1);
     },
   },
+  validations () {
+    return {
+      form: {
+        firstname: {
+          alpha,
+          required,
+          max: maxLength(25)
+        },
+        lastname: {
+          alpha,
+          required,
+          max: maxLength(25)
+        },
+        username: {
+          required,
+          min: minLength(4),
+          max: maxLength(20)
+        },
+        password: {
+          required,
+          min: minLength(8),
+          max: maxLength(20)
+        },
+        gender: {
+          required
+        },
+        contactNumber: {
+          alphaNum,
+          required,
+          max: maxLength(30)
+        },
+        email: {
+          required, email,
+          max: maxLength(30)
+        },
+        contactNumberType: {
+          required
+        }
+      }
+    }
+  }
 };
 </script>
 

@@ -49,11 +49,15 @@ export default {
 }
 
 .label__error {
-  letter-spacing: 1px;
-  color: var(--color-red);
-  font-size: 12px;
   height: 18px;
-  padding: 2px 0;
+  // background: rebeccapurple;
+}
+
+.label__span {
+  color: var(--color-red);
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 3px;
 }
 
 .input__error {

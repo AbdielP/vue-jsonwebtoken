@@ -14,11 +14,11 @@
           <h2 class="h2">INSERT YOUR USER AND PASSWORD</h2>
           <form class="form display-flex" @submit.prevent="login">
             <label class="label__error">
-              <p v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</p>
+              <span class="label__span" v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</span>
             </label> <!-- Username is required -->
             <BaseInput v-model="v$.form.username.$model" label="Username" :class="{ input__error: v$.form.username.$errors.length }" />
             <label class="label__error">
-              <p v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</p>  
+              <span class="label__span" v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</span>  
             </label> <!-- Password is required -->
             <BaseInput type="password" v-model="v$.form.password.$model" label="Password" autocomplete="on" :class="{ input__error: v$.form.password.$errors.length }" />
             <button :disabled="v$.form.$invalid" class="btn__main btn__login" type="submit">LOGIN</button>

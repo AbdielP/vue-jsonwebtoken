@@ -1,6 +1,6 @@
 <template>
   <select class="select" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
-    <option class="option" value="" disabled selected>Select an option</option>
+    <option class="option" value disabled selected>Select an option</option>
     <option class="option" value="mobile">Mobile</option>
     <option class="option" value="phone">Phone</option>
   </select>

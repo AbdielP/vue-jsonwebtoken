@@ -1,7 +1,7 @@
 <template>
   <main>
     <Background />
-    <h1 class="h1">SIGN IN</h1>
+    <!-- <h1 class="h1">SIGN IN</h1> -->
     <div class="section__form">
       <form @submit.prevent="signIn" class="form display-flex">
 
@@ -12,13 +12,13 @@
           <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
-                <p v-for="(error, index) of v$.form.firstname.$errors" :key="index">{{ error.$message }}</p>
+                <span class="label__span" v-for="(error, index) of v$.form.firstname.$errors" :key="index">{{ error.$message }}</span>
               </label> <!-- First name is required -->
               <BaseInput :class="{ input__error: v$.form.firstname.$errors.length }" v-model="v$.form.firstname.$model" label="First Name"/>
             </div>
             <div class="container__label display-flex">
               <label class="label__error">
-                <p v-for="(error, index) of v$.form.lastname.$errors" :key="index">{{ error.$message }}</p>
+                <span class="label__span" v-for="(error, index) of v$.form.lastname.$errors" :key="index">{{ error.$message }}</span>
               </label> <!-- Last name is required -->
               <BaseInput :class="{ input__error: v$.form.lastname.$errors.length }" v-model="v$.form.lastname.$model" label="Last Name"/>
             </div>
@@ -28,13 +28,13 @@
           <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
-                <p v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</p>  
+                <span class="label__span" v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</span>  
               </label> <!-- Username is required -->
               <BaseInput :class="{ input__error: v$.form.username.$errors.length }" v-model="v$.form.username.$model" label="Username"/>
             </div>
             <div class="container__label display-flex">
               <label class="label__error">
-                <p v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</p>  
+                <span class="label__span" v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</span>  
               </label> <!-- Password is required -->
               <BaseInput :class="{ input__error: v$.form.password.$errors.length }" type="password" v-model="v$.form.password.$model" label="Password" autocomplete="off" />
             </div>
@@ -54,9 +54,10 @@
                   <span class="radio__span"></span>
                 </label>
               </div>
-            <label class="label__error">
-              <p v-for="(error, index) of v$.form.gender.$errors" :key="index">{{ error.$message }}</p>
-            </label> <!-- Gender is required -->
+              <label class="label__error">
+                <span class="label__span" v-for="(error, index) of v$.form.gender.$errors" :key="index">{{ error.$message }}</span>
+                <span class="label__span" v-if="!v$.form.gender.$dirty">Please select a gender</span>
+              </label> <!-- Gender is required -->
             </div>
           </div>
         </section>
@@ -68,26 +69,41 @@
           <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
-                <p v-for="(error, index) of v$.form.email.$errors" :key="index">{{ error.$message }}</p>
+                <span class="label__span" v-for="(error, index) of v$.form.email.$errors" :key="index">{{ error.$message }}</span>
               </label> <!-- Email is required -->
               <BaseInput :class="{ input__error: v$.form.email.$errors.length }" type="email" v-model="v$.form.email.$model" label="Email Address"/>
             </div>
           </div>
 
           <!-- Fifth row -->
-          <div class="container__input display-flex">
+          <div class="display-flex">
+            <div class="container__label display-flex w-50">
+              <label class="label__error">
+                <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
+                <span class="label__span" v-if="!v$.form.contactNumberType.$dirty">Please select an option</span>
+              </label>
+              <BaseSelect :class="{ input__error: v$.form.contactNumberType.$errors.length }" v-model="v$.form.contactNumberType.$model"/>
+            </div>
             <div class="container__label display-flex">
               <label class="label__error">
-                <p v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</p>
-                <p v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</p>
-              </label> <!-- Please select and option or insert a number -->
-              <!-- Contact number -->
+                <span class="label__span" v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</span>
+              </label>
+              <BaseInput :class="{ input__error: v$.form.contactNumber.$errors.length }" v-model="v$.form.contactNumber.$model" label="Contact number" />
+            </div> 
+          </div>
+          <!-- <div class="container__input display-flex">
+            <div class="container__label display-flex">
+              <label class="label__error">
+                <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
+                <span class="label__span" v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</span>
+                <span class="label__span" v-if="!v$.form.contactNumberType.$dirty">Please select an option</span>
+              </label>
               <div class="container__phone display-flex">
                 <BaseSelect class="select__width" :class="{ input__error: v$.form.contactNumberType.$errors.length }" v-model="v$.form.contactNumberType.$model"/>
                 <BaseInput class="input__width" :class="{ input__error: v$.form.contactNumber.$errors.length }" v-model="v$.form.contactNumber.$model" label="Contact number" />
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Sixth row -->
           <div class="container__input display-flex">
@@ -111,6 +127,7 @@
           </button>
         </section>
         <button :disabled="v$.form.$invalid" type="submit" class="btn__main btn__submit">CREATE ACCOUNT</button>
+        <span class="label__span label__error" v-if="v$.form.$invalid">Please complete the form to create your user</span>
       </form>
       <div class="link__container">
         <router-link class="link__login display-flex" to="/auth/login">
@@ -238,6 +255,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 h1 {
   text-align: center;
   font-weight: 400;
@@ -440,6 +458,4 @@ h1 {
     width: 50%;
   }
 }
-// vuelidate validate select: https://stackoverflow.com/questions/64579580/how-can-i-use-vuelidate-to-validate-a-select-input
-// vuelidate validate gender: https://www.positronx.io/vue-js-forms-tutorial-form-validation-in-vue-with-vuelidate/
 </style>

@@ -440,4 +440,6 @@ h1 {
     width: 50%;
   }
 }
+// vuelidate validate select: https://stackoverflow.com/questions/64579580/how-can-i-use-vuelidate-to-validate-a-select-input
+// vuelidate validate gender: https://www.positronx.io/vue-js-forms-tutorial-form-validation-in-vue-with-vuelidate/
 </style>

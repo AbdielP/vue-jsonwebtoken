@@ -1,8 +1,11 @@
 <template>
-  <nav class="nav">
-    <router-link class="nav__link" to="/auth/me">User</router-link>
+  <nav class="nav display-flex">
+    <div class="container">
+      <router-link class="nav__link" to="/auth/me">My profile</router-link>
+      <!-- set here more router links -->
+    </div>
     <router-link class="nav__link" v-if="isLoggedIn === false" to="/auth/login">Login</router-link>
-    <button
+    <button class="btn__logout"
       type="button"
       v-if="isLoggedIn === true"
       @click="logOut"
@@ -29,15 +32,32 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-.nav
-    background: #ccc
-    padding: 5px
+<style lang="scss" scoped>
+.nav {
+  background: var(--color-white);
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
 
-    .nav__link
-        text-decoration: none
-        margin: 0 5px
-        color: #fff
-        &:hover
-            color: #D8D8D8
+.nav__link,
+.btn__logout {
+  cursor: pointer;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: var(--color-background);
+}
+
+.btn__logout {
+  border: none;
+  padding: 5px 10px;
+  font-weight: 900;
+  border-radius: 5px;
+  color: var(--color-white);
+  background: var(--color-background);
+}.btn__logout:hover {
+  background: var(--background-light);
+}
 </style>

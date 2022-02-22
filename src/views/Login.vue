@@ -91,8 +91,8 @@ export default {
         const data = await response.json();
         data.ok ? this.afterLogin(data) : this.errorHandler(data)
       } catch (error) {
-        this.showSpinner=!true;
         console.log(error);
+        this.showSpinner=!true;
       }
     },
     afterLogin(data) {

@@ -1,7 +1,7 @@
 <template>
   <main>
     <Background />
-    <!-- <h1 class="h1">SIGN IN</h1> -->
+    <h1 class="h1">SIGN IN</h1>
     <div class="section__form">
       <form @submit.prevent="signIn" class="form display-flex">
 
@@ -111,7 +111,10 @@
             Add phone
           </button>
         </section>
-        <button :disabled="v$.form.$invalid" type="submit" class="btn__main btn__submit">CREATE ACCOUNT</button>
+        <button :disabled="v$.form.$invalid || showSpinner" type="submit" class="btn__main btn__submit">
+          <span v-if="!showSpinner">CREATE ACCOUNT</span>
+          <Spinner v-if="showSpinner" />
+        </button>
         <span class="label__span label__error" v-if="v$.form.$invalid">Please complete the form to create your user</span>
       </form>
       <div class="link__container">
@@ -128,6 +131,7 @@
 import BaseInput from '@/components/BaseInput.vue';
 import Background from '@/components/Background.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
+import Spinner from '@/components/Spinner.vue';
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, maxLength, alpha, alphaNum, email, sameAs } from '@vuelidate/validators'
 export default {
@@ -135,7 +139,8 @@ export default {
   components: {
     BaseInput,
     Background,
-    BaseSelect
+    BaseSelect,
+    Spinner
   },
   setup () {
     return { v$: useVuelidate() }
@@ -153,10 +158,12 @@ export default {
         contactNumberType: "",
         rows: [],
       },
+      showSpinner: false
     };
   },
   methods: {
     async signIn() {
+      this.showSpinner=!false;
       try {
         const response = await fetch(
           `https://backend-node-server.herokuapp.com/api/vueforms/signin`,
@@ -181,7 +188,13 @@ export default {
         );
         const data = await response.json();
         console.log(data);
-      } catch (error) {}
+        // FALTA UN ERROR HANDLER AQUÍ PARA LOS ERRORES DE MONGOOSE
+        // FALTA SWEET ALERT PARA EL MESSAGE SUCCESS
+        this.showSpinner=!true;
+      } catch (error) {
+        console.log(error)
+        this.showSpinner=!true;
+      }
     },
     addRow() {
       if(this.form.rows.length < 3) {
@@ -244,7 +257,7 @@ export default {
 h1 {
   text-align: center;
   font-weight: 400;
-  margin: 70px 0 25px;
+  margin: 30px 0 25px;
 }
 
 .h2 {
@@ -404,16 +417,16 @@ h1 {
 }
 
 .link__login {
-  font-weight: 900;
   font-size: 14px;
+  font-weight: 900;
   align-items: center;
   text-decoration: none;
-  color: var(--color-blue);
+  color: var(--color-background);
   // background: rebeccapurple;
 }
 
 .img__arrow {
-  filter: invert(35%) sepia(70%) saturate(4869%) hue-rotate(195deg) brightness(94%) contrast(99%);
+  filter: invert(13%) sepia(75%) saturate(674%) hue-rotate(187deg) brightness(93%) contrast(88%);
   margin-right: 10px;
   width: 25px;
 }

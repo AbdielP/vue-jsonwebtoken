@@ -49,7 +49,7 @@ export default {
 }
 
 .label__error {
-  height: 18px;
+  min-height: 18.8px;
   // background: rebeccapurple;
 }
 

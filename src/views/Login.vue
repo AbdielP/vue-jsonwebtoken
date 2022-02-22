@@ -21,7 +21,13 @@
               <span class="label__span" v-for="(error, index) of v$.form.password.$errors" :key="index">{{ error.$message }}</span>  
             </label> <!-- Password is required -->
             <BaseInput type="password" v-model="v$.form.password.$model" label="Password" autocomplete="on" :class="{ input__error: v$.form.password.$errors.length }" />
-            <button :disabled="v$.form.$invalid" class="btn__main btn__login" type="submit">LOGIN</button>
+            <label class="label__error text-center">
+              <span v-if="errorMessage" class="label__span">{{errorMessage}}</span>
+            </label>
+            <button :disabled="v$.form.$invalid || showSpinner" class="btn__main btn__login" type="submit">
+              <span v-if="!showSpinner">LOGIN</span>
+              <Spinner v-if="showSpinner" />
+            </button>
           </form>
           <p class="paragraph">Doesn't have an account yet?</p>
           <router-link class="link" to="/auth/signin"
@@ -29,8 +35,6 @@
           >
         </div>
       </div>
-
-      <!-- <h3 class="h3">Made in Vue CLI 3@ by <a class="link link__blue" href="https://github.com/AbdielP">@abdielpinzon</a></h3> -->
       <h3 class="h3">
         A VueJS jasonwebtoken application with form validations
       </h3>
@@ -41,6 +45,7 @@
 <script>
 import Background from '@/components/Background.vue';
 import BaseInput from '@/components/BaseInput.vue';
+import Spinner from '@/components/Spinner.vue'
 import useVuelidate from '@vuelidate/core'
 import { mapMutations } from "vuex";
 import { required } from '@vuelidate/validators'
@@ -48,7 +53,8 @@ export default {
   name: "Login",
   components: {
     Background,
-    BaseInput
+    BaseInput,
+    Spinner
   },
   setup () {
     return { v$: useVuelidate() }
@@ -58,12 +64,15 @@ export default {
       form: {
         username: "",
         password: "",
-      }
+      },
+      showSpinner: false,
+      errorMessage: ''
     };
   },
   methods: {
     ...mapMutations(["setToken"]),
     async login() {
+      this.showSpinner=!false;
       try {
         const response = await fetch(
           `https://backend-node-server.herokuapp.com/api/vueforms/login`,
@@ -80,16 +89,23 @@ export default {
           }
         );
         const data = await response.json();
-        data.ok ? this.afterLogin(data) : console.log(data.message);
+        data.ok ? this.afterLogin(data) : this.errorHandler(data)
       } catch (error) {
+        this.showSpinner=!true;
         console.log(error);
       }
     },
     afterLogin(data) {
       this.setToken(data.token);
       localStorage.setItem("jwtapptoken", data.token);
+      this.showSpinner=!true;
       this.$router.push("/auth/me");
     },
+    errorHandler(data) {
+      const { message }  = data;
+      this.showSpinner=!true;
+      this.errorMessage = message;
+    }
   },
   validations () {
     return {
@@ -163,7 +179,8 @@ export default {
   padding: 15px 10px;
   border-radius: 5px;
   font-weight: 900;
-  margin: 25px 0;
+  // margin: 25px 0;
+  margin-bottom: 25px;
 }
 
 .link {
@@ -176,14 +193,14 @@ export default {
   transition: 0.3s ease-in-out;
 }
 
-.link__blue {
-  color: var(--color-blue);
-}
-
 .h3 {
   margin: 20px 10px;
   font-weight: 400;
   font-size: 15px;
+}
+
+.text-center {
+  text-align: center;
 }
 
 @media (min-width: 700px) { 

@@ -20,7 +20,7 @@
       <div class="container">
         <h2 class="h2">Contact info</h2>
         <h3 class="h3">My contact email is
-          <a class="link__email" href="mailto:">{{userinfo.email}}</a>
+          <a class="link__email" :href="'mailto:' + userinfo.email">{{userinfo.email}}</a>
         </h3>
         
         <div class="container__phone display-flex">
@@ -146,6 +146,7 @@ export default {
 }
 
 .h3 {
+  display: inline-block;
   font-size: 1.5rem;
   padding: 12px 0 20px;
 }

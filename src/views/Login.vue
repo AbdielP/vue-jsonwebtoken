@@ -102,6 +102,7 @@ export default {
       this.$router.push("/auth/me");
     },
     errorHandler(data) {
+      console.log(data);
       const { message }  = data;
       this.showSpinner=!true;
       this.errorMessage = message;
@@ -184,7 +185,7 @@ export default {
 }
 
 .link {
-  display: block;
+  max-width: 150px;
   margin: 5px 0;
   color: var(--color-orange);
   font-style: italic;

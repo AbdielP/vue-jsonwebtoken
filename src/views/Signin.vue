@@ -76,22 +76,7 @@
           </div>
 
           <!-- Fifth row -->
-          <div class="display-flex">
-            <div class="container__label display-flex w-50">
-              <label class="label__error">
-                <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
-                <span class="label__span" v-if="!v$.form.contactNumberType.$dirty">Please select an option</span>
-              </label>
-              <BaseSelect :class="{ input__error: v$.form.contactNumberType.$errors.length }" v-model="v$.form.contactNumberType.$model"/>
-            </div>
-            <div class="container__label display-flex">
-              <label class="label__error">
-                <span class="label__span" v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</span>
-              </label>
-              <BaseInput :class="{ input__error: v$.form.contactNumber.$errors.length }" v-model="v$.form.contactNumber.$model" label="Contact number" />
-            </div> 
-          </div>
-          <!-- <div class="container__input display-flex">
+          <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
                 <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
@@ -103,7 +88,7 @@
                 <BaseInput class="input__width" :class="{ input__error: v$.form.contactNumber.$errors.length }" v-model="v$.form.contactNumber.$model" label="Contact number" />
               </div>
             </div>
-          </div> -->
+          </div>
 
           <!-- Sixth row -->
           <div class="container__input display-flex">
@@ -434,6 +419,7 @@ h1 {
 }
 
 @media (min-width: 700px) {
+
   .form, 
   .link__container {
     margin: 0 auto;

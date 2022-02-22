@@ -25,18 +25,25 @@
         
         <div class="container__phone display-flex">
           <span class="span__type_phone">{{userinfo.contactNumberType}}</span>
-          <span class="span__phone_number">{{userinfo.contactNumber}}</span>
+          <div class="container__number_phone display-flex">
+            <span>{{userinfo.contactNumber}}</span>
+            <img class="phone__icon phone" src="../assets/svg/phone-flip-solid.svg" alt="phone flip icon">
+            <img class="phone__icon whatsapp" src="../assets/svg/whatsapp-brands.svg" alt="whatsapp icon">
+          </div>
         </div>
+
+        <template v-if="contactNumbers">
+          <div v-for="info in contactNumbers" :key="info.number" class="container__phone display-flex">
+            <span class="span__type_phone">{{info.type}}}</span>
+            <div class="container__number_phone display-flex">
+              <span>{{info.number}}</span>
+              <img class="phone__icon phone" src="../assets/svg/phone-flip-solid.svg" alt="phone flip icon">
+              <img class="phone__icon whatsapp" src="../assets/svg/whatsapp-brands.svg" alt="whatsapp icon">
+            </div>
+          </div>
+        </template>
       </div>
     </section>
-    <!-- <h1>User info</h1>
-    <label
-
-    <h2>Contact numbers</h2>
-    <p>{{userinfo.contactNumberType}}: {{userinfo.contactNumber}}</p>
-    <ul v-if="contactNumbers">
-      <li v-for="info in contactNumbers" :key="info.number">{{info.type}} - {{info.number}}</li>
-    </ul> -->
   </main>
 </template>
 
@@ -63,7 +70,6 @@ export default {
           }
         );
         const data = await response.json();
-        console.log(data)
         !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user, this.contactNumbers = data.usernumbers;
       } catch (error) {
         console.log(error);
@@ -85,23 +91,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.span__type_phone {
-  background: #99D930;;
-  text-transform: capitalize;
-  border-radius: 30px;
-  padding: 3px 10px;
-}
-
-.span__phone_number {
-  
-}
-.container__phone {
-  // background: goldenrod;
-  padding: 10px;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--color-white);
-}
 .main {
   text-align: center;
 }
@@ -159,7 +148,6 @@ export default {
 .h3 {
   font-size: 1.5rem;
   padding: 12px 0 20px;
-  // border-bottom: 1px solid var(--color-white);
 }
 
 .link__email {
@@ -168,6 +156,37 @@ export default {
   margin-top: 5px;
   font-weight: initial;
   color: var(--color-orange);
+}
+
+.span__type_phone {
+  background: var(--color-white);
+  text-transform: capitalize;
+  border-radius: 30px;
+  color: #25D366;
+  font-weight: 900;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+.container__number_phone {
+  width: 180px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.container__phone {
+  padding: 15px 10px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-white);
+}
+
+.phone__icon {
+  width: 18px;
+}.whatsapp {
+  filter: invert(57%) sepia(82%) saturate(409%) hue-rotate(90deg) brightness(98%) contrast(97%);
+}.phone {
+  filter: invert(99%) sepia(3%) saturate(105%) hue-rotate(262deg) brightness(116%) contrast(90%);
 }
 
 </style>

@@ -78,7 +78,7 @@
           </div>
 
           <!-- Fifth row -->
-          <div class="container__input display-flex">
+          <!-- <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
                 <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
@@ -91,7 +91,7 @@
                 <BaseInput class="input__width" :class="[v$.form.contactNumber.$errors.length ? 'input__error' : '', formUnique.contactNumber ? 'input__error' : '']" v-model="v$.form.contactNumber.$model" label="Contact number" />
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Sixth row -->
           <div class="container__input display-flex">
@@ -101,7 +101,7 @@
                 <BaseSelect class="select__width" v-model="row.type"/>
                 <BaseInput class="input__width" v-model="row.number" label="Contact number"/>
                 <button class="btn__remove"
-                  @click="removeRow(index)"
+                  @click="removeRow(index)" v-if="index > 0"
                   type="button"
                   aria-labelledby="Remove number">
                   <img src="../assets/svg/icon-delete.svg" alt="Delete">          
@@ -169,6 +169,9 @@ export default {
       },
       showSpinner: false
     };
+  },
+  created () {
+    this.addRow();
   },
   methods: {
     async signIn() {

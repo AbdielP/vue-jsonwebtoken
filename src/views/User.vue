@@ -34,7 +34,7 @@
 
         <template v-if="contactNumbers">
           <div v-for="info in contactNumbers" :key="info.number" class="container__phone display-flex">
-            <span class="span__type_phone">{{info.type}}}</span>
+            <span class="span__type_phone">{{info.type}}</span>
             <div class="container__number_phone display-flex">
               <span>{{info.number}}</span>
               <img class="phone__icon phone" src="../assets/svg/phone-flip-solid.svg" alt="phone flip icon">

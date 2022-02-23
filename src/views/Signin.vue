@@ -28,9 +28,10 @@
           <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
+                <span class="label__span" v-if="formUnique.username" >Username already exists</span>  
                 <span class="label__span" v-for="(error, index) of v$.form.username.$errors" :key="index">{{ error.$message }}</span>  
               </label> <!-- Username is required -->
-              <BaseInput :class="{ input__error: v$.form.username.$errors.length }" v-model="v$.form.username.$model" label="Username"/>
+              <BaseInput :class="[v$.form.username.$errors.length ? 'input__error' : '', formUnique.username ? 'input__error' : '']" v-model="v$.form.username.$model" label="Username"/>
             </div>
             <div class="container__label display-flex">
               <label class="label__error">
@@ -69,9 +70,10 @@
           <div class="container__input display-flex">
             <div class="container__label display-flex">
               <label class="label__error">
+                <span class="label__span" v-if="formUnique.email" >Email already registered</span>
                 <span class="label__span" v-for="(error, index) of v$.form.email.$errors" :key="index">{{ error.$message }}</span>
               </label> <!-- Email is required -->
-              <BaseInput :class="{ input__error: v$.form.email.$errors.length }" type="email" v-model="v$.form.email.$model" label="Email Address"/>
+              <BaseInput :class="[v$.form.email.$errors.length ? 'input__error' : '', formUnique.email ? 'input__error' : '']" type="email" v-model="v$.form.email.$model" label="Email Address"/>
             </div>
           </div>
 
@@ -82,10 +84,11 @@
                 <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
                 <span class="label__span" v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</span>
                 <span class="label__span" v-if="!v$.form.contactNumberType.$dirty">Please select an option</span>
+                <span class="label__span" v-if="formUnique.contactNumber" >Number already registered</span>
               </label>
               <div class="container__phone display-flex">
                 <BaseSelect class="select__width" :class="{ input__error: v$.form.contactNumberType.$errors.length }" v-model="v$.form.contactNumberType.$model"/>
-                <BaseInput class="input__width" :class="{ input__error: v$.form.contactNumber.$errors.length }" v-model="v$.form.contactNumber.$model" label="Contact number" />
+                <BaseInput class="input__width" :class="[v$.form.contactNumber.$errors.length ? 'input__error' : '', formUnique.contactNumber ? 'input__error' : '']" v-model="v$.form.contactNumber.$model" label="Contact number" />
               </div>
             </div>
           </div>
@@ -128,11 +131,12 @@
 </template>
 
 <script>
-import BaseInput from '@/components/BaseInput.vue';
-import Background from '@/components/Background.vue';
-import BaseSelect from '@/components/BaseSelect.vue';
-import Spinner from '@/components/Spinner.vue';
+import BaseInput from '@/components/BaseInput.vue'
+import Background from '@/components/Background.vue'
+import BaseSelect from '@/components/BaseSelect.vue'
+import Spinner from '@/components/Spinner.vue'
 import useVuelidate from '@vuelidate/core'
+import Swal from 'sweetalert2'
 import { required, minLength, maxLength, alpha, alphaNum, email, sameAs } from '@vuelidate/validators'
 export default {
   name: "Signin",
@@ -157,6 +161,11 @@ export default {
         email: "",
         contactNumberType: "",
         rows: [],
+      },
+      formUnique: {
+        contactNumber: false,
+        username: false,
+        email: false
       },
       showSpinner: false
     };
@@ -187,10 +196,8 @@ export default {
           }
         );
         const data = await response.json();
-        console.log(data);
-        // FALTA UN ERROR HANDLER AQUÍ PARA LOS ERRORES DE MONGOOSE
-        // FALTA SWEET ALERT PARA EL MESSAGE SUCCESS
         this.showSpinner=!true;
+        data.ok ? this.swal('Success!', data, 'success') : this.fieldsUnique(data)
       } catch (error) {
         console.log(error)
         this.showSpinner=!true;
@@ -207,6 +214,19 @@ export default {
     removeRow(index) {
       this.form.rows.splice(index, 1);
     },
+    swal(title, data, icon) {
+      Swal.fire({
+        title: title,
+        text: data.message,
+        icon: icon
+      })
+    },fieldsUnique(data) {
+      console.log(data)
+      const { contactNumber, email, username } = data.error.errors;
+      if (contactNumber) this.formUnique.contactNumber =!false;
+      if (username) this.formUnique.username =!false;
+      if (email) this.formUnique.email =!false;
+    }
   },
   validations () {
     return {

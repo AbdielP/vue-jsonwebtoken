@@ -22,15 +22,6 @@
         <h3 class="h3">My contact email is
           <a class="link__email" :href="'mailto:' + userinfo.email">{{userinfo.email}}</a>
         </h3>
-        
-        <div class="container__phone display-flex">
-          <span class="span__type_phone">{{userinfo.contactNumberType}}</span>
-          <div class="container__number_phone display-flex">
-            <span>{{userinfo.contactNumber}}</span>
-            <img class="phone__icon phone" src="../assets/svg/phone-flip-solid.svg" alt="phone flip icon">
-            <img class="phone__icon whatsapp" src="../assets/svg/whatsapp-brands.svg" alt="whatsapp icon">
-          </div>
-        </div>
 
         <template v-if="contactNumbers">
           <div v-for="info in contactNumbers" :key="info.number" class="container__phone display-flex">

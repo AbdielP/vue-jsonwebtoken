@@ -1,4 +1,4 @@
-# vue-reactive-form
+# vue-jsonwebtoken
 
 ## Project setup
 ```

@@ -1,3 +1,3 @@
 // module.exports = {
-//     publicPath: '/vue-reactive-form/'
+//     publicPath: '/vue-jsonwebtoken/'
 // }

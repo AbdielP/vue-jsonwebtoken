@@ -80,28 +80,12 @@
           <!-- Fifth row -->
           <div class="container__input display-flex">
             <div class="container__label display-flex">
-              <label class="label__error">
-                <span class="label__span" v-for="(error, index) of v$.form.contactNumberType.$errors" :key="index">{{ error.$message }}</span>
-                <span class="label__span" v-for="(error, index) of v$.form.contactNumber.$errors" :key="index">{{ error.$message }}</span>
-                <span class="label__span" v-if="!v$.form.contactNumberType.$dirty">Please select an option</span>
-                <span class="label__span" v-if="formUnique.contactNumber" >Number already registered</span>
-              </label>
-              <div class="container__phone display-flex">
-                <BaseSelect class="select__width" :class="{ input__error: v$.form.contactNumberType.$errors.length }" v-model="v$.form.contactNumberType.$model"/>
-                <BaseInput class="input__width" :class="[v$.form.contactNumber.$errors.length ? 'input__error' : '', formUnique.contactNumber ? 'input__error' : '']" v-model="v$.form.contactNumber.$model" label="Contact number" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Sixth row -->
-          <div class="container__input display-flex">
-            <div class="container__label display-flex">
               <!-- Extra contact number -->
-              <div class="container__phone display-flex" v-for="(row, index) in form.rows" :key="index">
+              <div class="container__phone display-flex extra-margin" v-for="(row, index) in form.rows" :key="index">
                 <BaseSelect class="select__width" v-model="row.type"/>
-                <BaseInput class="input__width" v-model="row.number" label="Contact number"/>
+                <BaseInput class="input__width" v-model="row.number" label="Contact number"/> 
                 <button class="btn__remove"
-                  @click="removeRow(index)"
+                  @click="removeRow(index)" v-if="index > 0"
                   type="button"
                   aria-labelledby="Remove number">
                   <img src="../assets/svg/icon-delete.svg" alt="Delete">          
@@ -157,18 +141,18 @@ export default {
         username: "",
         password: "",
         gender: "",
-        contactNumber: "",
         email: "",
-        contactNumberType: "",
         rows: [],
       },
       formUnique: {
-        contactNumber: false,
         username: false,
         email: false
       },
       showSpinner: false
     };
+  },
+  created () {
+    this.addRow();
   },
   methods: {
     async signIn() {
@@ -188,9 +172,7 @@ export default {
               username: this.form.username,
               password: this.form.password,
               gender: this.form.gender,
-              contactNumber: this.form.contactNumber,
               email: this.form.email,
-              contactNumberType: this.form.contactNumberType,
               rows: this.form.rows,
             }),
           }
@@ -222,8 +204,7 @@ export default {
       })
     },fieldsUnique(data) {
       console.log(data)
-      const { contactNumber, email, username } = data.error.errors;
-      if (contactNumber) this.formUnique.contactNumber =!false;
+      const { email, username } = data.error.errors;
       if (username) this.formUnique.username =!false;
       if (email) this.formUnique.email =!false;
     }
@@ -254,17 +235,9 @@ export default {
         gender: {
           required
         },
-        contactNumber: {
-          alphaNum,
-          required,
-          max: maxLength(30)
-        },
         email: {
           required, email,
           max: maxLength(30)
-        },
-        contactNumberType: {
-          required
         }
       }
     }
@@ -273,6 +246,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.extra-margin {
+  margin-top: 10px;
+}
 
 h1 {
   text-align: center;

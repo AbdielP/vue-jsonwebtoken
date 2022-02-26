@@ -4,7 +4,7 @@
       <router-link class="nav__link" to="/auth/me">
         My profile <img class="logo" src="../assets/svg/user-solid.svg" alt="user logo">
       </router-link>
-      <router-link class="nav__link" to="/auth/me">
+      <router-link class="nav__link" to="/auth/token">
         Token info <img class="logo--xl" src="../assets/svg/code-solid.svg" alt="token logo">
       </router-link>
     </div>

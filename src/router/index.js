@@ -17,6 +17,11 @@ const routes = [
     name: 'User',
     component: () => import(/* webpackChunkName: "user" */ '../views/User.vue')
   },
+  {
+    path: '/auth/token',
+    name: 'Token',
+    component: () => import(/* webpackChunkName: "token" */ '../views/Token.vue')
+  }
 ]
 
 const router = createRouter({

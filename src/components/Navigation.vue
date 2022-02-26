@@ -1,8 +1,12 @@
 <template>
   <nav class="nav display-flex">
     <div class="container">
-      <router-link class="nav__link" to="/auth/me">My profile</router-link>
-      <!-- set here more router links -->
+      <router-link class="nav__link" to="/auth/me">
+        My profile <img class="logo" src="../assets/svg/user-solid.svg" alt="user logo">
+      </router-link>
+      <router-link class="nav__link" to="/auth/me">
+        Token info <img class="logo--xl" src="../assets/svg/code-solid.svg" alt="token logo">
+      </router-link>
     </div>
     <router-link class="nav__link" v-if="isLoggedIn === false" to="/auth/login">Login</router-link>
     <button class="btn__logout"
@@ -46,8 +50,18 @@ export default {
 }
 
 .nav__link {
+  font-size: 1rem;
+  padding: .2em .3em;
   text-decoration: none;
   color: var(--color-background);
+}
+
+.logo {
+  width: .75em;
+  filter: var(--color-background-filter);
+}.logo--xl {
+  width: 1em;
+  filter: var(--color-background-filter);
 }
 
 .btn__logout {

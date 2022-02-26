@@ -34,6 +34,7 @@ export default {
   --color-red: #fa6565;
   --color-gray: #ccc;
   --color-background: #212f4f;
+  --color-background-filter: invert(13%) sepia(75%) saturate(674%) hue-rotate(187deg) brightness(93%) contrast(88%);
 }
 
 .display-flex {

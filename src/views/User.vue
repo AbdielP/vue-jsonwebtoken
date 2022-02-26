@@ -51,8 +51,8 @@ export default {
   computed: {
     ...mapGetters(["getToken"]),
   },
-  ...mapMutations(["setToken"]),
   methods: {
+    ...mapMutations(["setToken"]),
     async getUserInfo() {
       try {
         const response = await fetch(`https://backend-node-server.herokuapp.com/api/vueforms/user/info?token=${this.getToken}`, {
@@ -67,7 +67,7 @@ export default {
       }
     },
     errorHandler(err) {
-      console.log(err)
+      // console.log(err)
       if (err.name === "TokenExpiredError") {
         localStorage.removeItem("jwtapptoken");
         this.setToken(null);

@@ -8,7 +8,6 @@ export default {
             );
             const data = await response.json();
             return data;
-            // !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user, this.contactNumbers = data.usernumbers;
           } catch (error) {
             console.log(error);
           }

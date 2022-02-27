@@ -40,6 +40,7 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import UserData from "@/shared/user-data";
 export default {
   name: "User",
   data() {
@@ -54,17 +55,8 @@ export default {
   methods: {
     ...mapMutations(["setToken"]),
     async getUserInfo() {
-      try {
-        const response = await fetch(`https://backend-node-server.herokuapp.com/api/vueforms/user/info?token=${this.getToken}`, {
-        // const response = await fetch(`http://localhost:3000/api/vueforms/user/info?token=${this.getToken}`,{
-            method: "GET",
-          }
-        );
-        const data = await response.json();
-        !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user, this.contactNumbers = data.usernumbers;
-      } catch (error) {
-        console.log(error);
-      }
+      const data = await UserData.getUserInfo(this.getToken);
+      !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user, this.contactNumbers = data.usernumbers;
     },
     errorHandler(err) {
       // console.log(err)

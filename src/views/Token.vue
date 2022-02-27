@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import UserData from "@/shared/user-data";
 export default {
   name: "Token",
@@ -46,16 +46,19 @@ export default {
     ...mapGetters(["getToken"]),
   },
   methods: {
+    ...mapMutations(["setToken"]),
     async getUserInfo() {
       const data = await UserData.getUserInfo(this.getToken);
-      this.userdata = data.user;
-      /**
-       * Pendiente:
-       * Error-handler
-       * Eliminar password y id del backend (desde el modelo?)
-       * Implementar en ambos comonentes
-       */
+      !data.ok ? this.errorHandler(data.err) : this.userdata = data.user;
     },
+    errorHandler(err) {
+      // console.log(err)
+      if (err.name === "TokenExpiredError") {
+        localStorage.removeItem("jwtapptoken");
+        this.setToken(null);
+        return this.$router.push("/auth/login");
+      }
+    }
   },
   created() {
     this.getUserInfo();

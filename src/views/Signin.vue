@@ -418,11 +418,18 @@ h1 {
   align-items: center;
   text-decoration: none;
   color: var(--color-background);
+<<<<<<< HEAD
   // background: rebeccapurple;
 }
 
 .img__arrow {
   filter: invert(13%) sepia(75%) saturate(674%) hue-rotate(187deg) brightness(93%) contrast(88%);
+=======
+}
+
+.img__arrow {
+  filter: var(--color-background-filter);
+>>>>>>> 5a497a9859ee8e23363f77c46df05d8698fdb1c0
   margin-right: 10px;
   width: 25px;
 }

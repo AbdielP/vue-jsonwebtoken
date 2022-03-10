@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+<<<<<<< HEAD
     "build": "vue-cli-service build"
+=======
+    "build": "vue-cli-service build",
+    "deploy": "node scripts/gh-pages-deploy.js"
+>>>>>>> 5a497a9859ee8e23363f77c46df05d8698fdb1c0
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.0-alpha.34",
@@ -22,6 +27,11 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "sass": "^1.26.5",
+<<<<<<< HEAD
     "sass-loader": "^8.0.2"
+=======
+    "sass-loader": "^8.0.2",
+    "execa": "5.1.1"
+>>>>>>> 5a497a9859ee8e23363f77c46df05d8698fdb1c0
   }
 }

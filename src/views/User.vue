@@ -40,6 +40,10 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+<<<<<<< HEAD
+=======
+import UserData from "@/shared/user-data";
+>>>>>>> 5a497a9859ee8e23363f77c46df05d8698fdb1c0
 export default {
   name: "User",
   data() {
@@ -51,6 +55,7 @@ export default {
   computed: {
     ...mapGetters(["getToken"]),
   },
+<<<<<<< HEAD
   ...mapMutations(["setToken"]),
   methods: {
     async getUserInfo() {
@@ -68,6 +73,16 @@ export default {
     },
     errorHandler(err) {
       console.log(err)
+=======
+  methods: {
+    ...mapMutations(["setToken"]),
+    async getUserInfo() {
+      const data = await UserData.getUserInfo(this.getToken);
+      !data.ok ? this.errorHandler(data.err) : this.userinfo = data.user, this.contactNumbers = data.usernumbers;
+    },
+    errorHandler(err) {
+      // console.log(err)
+>>>>>>> 5a497a9859ee8e23363f77c46df05d8698fdb1c0
       if (err.name === "TokenExpiredError") {
         localStorage.removeItem("jwtapptoken");
         this.setToken(null);

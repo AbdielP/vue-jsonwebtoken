@@ -16,7 +16,53 @@ A Jsonwebtoken application made in Vue 3.
 
 ### About
 
-A basic login aplication that implements jsonwebtokens to authenticate the user. It save the token in localstorage and persist sessions after closing the browser. (session token expires after 3 minutes)
+A basic login application that implements jsonwebtokens to authenticate the user. It save the token in localstorage and persist sessions after closing the browser. (session token expires after 3 minutes)
+
+This application implements Vue routing, Vuex, communication between components and reusable components as spinner and BaseInput components.
+
+(BaseInput reusable component)
+```vue
+<template>
+  <input
+    class="input__style"
+    :type="type"
+    :placeholder="label"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  />
+</template>
+
+<script>
+export default {
+  name: "BaseInput",
+  props: {
+    type: {
+      type: String,
+      default: "Text",
+    },
+    label: {
+      type: String,
+      dafault: "",
+    },
+    modelValue: {
+      type: [String, Number],
+      default: "",
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.input__style {
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
+  letter-spacing: 1.2px;
+  border-radius: 5px;
+  background: none;
+  padding: 10px;
+}
+</style>
+```
 
 ### Screenshot
 

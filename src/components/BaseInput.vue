@@ -1,5 +1,4 @@
 <template>
-  <!-- <label>{{label}}</label> -->
   <input
     class="input__style"
     :type="type"
@@ -37,6 +36,5 @@ export default {
   border-radius: 5px;
   background: none;
   padding: 10px;
-  // width: 100%;
 }
 </style>
